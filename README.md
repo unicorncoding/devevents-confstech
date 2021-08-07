@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/unicorncoding/devevents-api.svg?branch=master)](https://travis-ci.org/unicorncoding/devevents-api)
+[![Build Status](https://travis-ci.com/unicorncoding/devevents-api.svg?branch=master)](https://travis-ci.com/unicorncoding/devevents-api)
 
 # dev.events API
 
