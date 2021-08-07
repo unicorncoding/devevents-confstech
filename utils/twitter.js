@@ -1,9 +1,8 @@
 console.time("initializing twitter");
 const Twit = require("twit");
 const { countryName, countryEmoji } = require("./geo");
-const { isFuture, dayjs } = require("./dates");
+const { isFuture, prettyRange, dayjs } = require("./dates");
 const { topics: allTopics } = require("./topics");
-const utc = dayjs.utc;
 
 const config = {
   consumer_key: process.env.twitter_consumer_key || "none",
@@ -24,7 +23,7 @@ module.exports.tweet = (event) => {
       what(event),
       about(event),
       location(event),
-      `🗓 ${date(event)}`,
+      `🗓 ${prettyRange(event.startDate, event.endDate)}`,
       price(event),
       cfpOrUndefined(event),
       retweetPlease(event),
@@ -65,21 +64,6 @@ function what({ name }) {
 function about({ topics, category }) {
   const [mainTopic] = topics;
   return `ℹ️ ${allTopics[mainTopic].name} ${category}`;
-}
-
-function date({ startDate, endDate }) {
-  const start = utc(startDate);
-  const oneDayEvent = !endDate || start.isSame(dayjs(endDate), "day");
-  if (oneDayEvent) {
-    return start.format("MMMM D YYYY");
-  }
-  const end = utc(endDate);
-  const sameMonth = start.month() == end.month();
-  if (sameMonth) {
-    return end.format(`MMMM ${start.format("D")}-D YYYY`);
-  } else {
-    return start.format("MMMM D") + " - " + end.format("MMMM D YYYY");
-  }
 }
 
 function cfpOrUndefined({ cfpEndDate }) {
