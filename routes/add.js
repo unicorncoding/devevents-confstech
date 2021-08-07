@@ -25,7 +25,11 @@ const required = () => {
     body("topic").isIn(Object.keys(topics)),
     body("countryCode").isIn(countries),
     body("category").isIn(eventTypes).optional(),
-    body("name").customSanitizer(emojiStrip).trim().notEmpty(),
+    body("name")
+      .customSanitizer(emojiStrip)
+      .trim()
+      .notEmpty()
+      .isLength({ max: 45 }),
     body("price")
       .exists()
       .bail()
