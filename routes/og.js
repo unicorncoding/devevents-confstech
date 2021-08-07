@@ -29,8 +29,8 @@ router.get(
 
     const imageDomain = "https://res.cloudinary.com/eduardsi/image/upload";
     const imageTemplate = free
-      ? "devevents_free_tbf6t9.png"
-      : "devevents_paid_fct4xg.png";
+      ? "devevents_free_new_q66uza.png"
+      : "devevents_paid_new_gmoqyo.png";
     const title = name;
 
     const subtitle =
